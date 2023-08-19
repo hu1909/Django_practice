@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charsset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous" />
+        <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    
+                    <li>
+                        <a class="navbar-brand" href="{% url 'index' %}">Django</a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="{% url 'Website:register' %}">Register</a>
+                    </li>
+                    
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a class="navbar-brand" href="{% url 'Website:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="navbar-brand" href="{% url 'Website:login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            {% block body_block %}
+            <!-- Anything outsite of this block will be inherited if extend-->
+            {% endblock%}
+        </div>
+    </body>
+</html>
